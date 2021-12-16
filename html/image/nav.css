@@ -1,0 +1,35 @@
+
+body {
+    margin: 0px;
+   }
+.backround{
+   background-image: url("image/backround_img3.jpg");
+   height: 600px;
+   width: 1365px;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   position: relative;
+   }
+.topnav {
+   overflow: auto;
+   background-color: rgb(88, 0, 0);
+   
+   }
+
+.topnav a {
+   float: left;
+   color: #ffffff;
+   text-align: center;
+   padding: 20px 20px;
+   font-size: 18px;
+   }
+.topnav-right {
+   float: right;
+   }
+.search{
+   text-align: center;
+   align-self: center ;
+  
+
+}
