@@ -62,6 +62,10 @@ public class Products {
 	public Products(String string, String string2, double double1, String string3, String string4) {
 		// TODO Auto-generated constructor stub
 	}
+	public Products(String selectProduct) {
+		// TODO Auto-generated constructor stub
+		this.productName=productName;
+	}
 	@Override
 	public String toString() {
 		return "Products [productId=" + productId + ", productName=" + productName + ", description=" + description

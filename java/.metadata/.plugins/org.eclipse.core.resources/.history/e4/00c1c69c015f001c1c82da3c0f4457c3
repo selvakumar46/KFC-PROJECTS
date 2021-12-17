@@ -1,0 +1,31 @@
+package com.kfc;
+
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProductDao {
+	public  List<Products> showProduct() throws SQLException {
+		List<Products> listOfProducts = new ArrayList<Products>();
+		Products product = null;
+		String query = "select * from products_kfc";
+		ConnectionUtil conect = new ConnectionUtil();
+		Connection con = conect.getDBConnection();
+		Statement stmt=con.createStatement();
+		ResultSet rs = stmt.executeQuery(query);
+		while (rs.next()) {
+//			product = new Products(rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6));
+//			listOfProducts.add(product);
+			System.out.format("%-6s%-28s%-7s%-10s%-6s%-10s%-10s%-9s","name",rs.getString(2),"price", rs.getDouble(4),"type",
+																			rs.getString(5),"Status",rs.getString(6));
+			System.out.println();
+		}
+
+		return listOfProducts;
+
+	}
+
+}
