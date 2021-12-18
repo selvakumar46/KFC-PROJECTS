@@ -34,8 +34,10 @@ INSERT INTO PRODUCTS_KFC (PRODUCT_NAME,DESCRIPTION,PRODUCT_PRICE,PRODUCT_TYPE,PR
 INSERT INTO PRODUCTS_KFC (PRODUCT_NAME,DESCRIPTION,PRODUCT_PRICE,PRODUCT_TYPE,PRODUCT_STATUS)VALUES('Pepsi ','330ml Can',60,'veg','Available');
 INSERT INTO PRODUCTS_KFC (PRODUCT_NAME,DESCRIPTION,PRODUCT_PRICE,PRODUCT_TYPE,PRODUCT_STATUS)VALUES('Red Bull','Energy Drink',160,'veg','Available');
 
+update  products_kfc set product_name='Pepsi' where product_id=8;
 
-select * from products_kfc;
+select * from products_kfc where product_name='Red Bull';
+commit;
 
 --------------------------------------------------------------------------------------------------------------------------------
 CREATE SEQUENCE ORD
@@ -46,7 +48,8 @@ CREATE TABLE ORDER_KFC(CART_ID NUMBER DEFAULT ORD.NEXTVAL PRIMARY KEY,PRODUCT_ID
                         FOREIGN KEY (USER_ID) REFERENCES USER_KFC (USER_ID));
                         
 DESCRIBE ORDER_KFC;
-drop table products_kfc;
+select * from order_kfc;
+select * from products_kfc where product_name='Pepsi ';
 --------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE INVOICE_KFC(INVOICE_ID NUMBER PRIMARY KEY,PRODUCT_ID NUMBER,USER_ID NUMBER,FINAL_PRICE NUMBER(8,2),
                            FOREIGN KEY (PRODUCT_ID)REFERENCES PRODUCTS_KFC(PRODUCT_ID),

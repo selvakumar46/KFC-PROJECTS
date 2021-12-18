@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import pojo.Orders;
+
 public class ProductDao {
 	public List<Products> showProduct() throws SQLException {
 		List<Products> listOfProducts = new ArrayList<Products>();
@@ -29,23 +31,26 @@ public class ProductDao {
 
 	}
 
-	public Products validateProduct(Products product) throws SQLException {
+	public Products validateProduct(String selectProduct) throws SQLException {
 		Products productValid = null;
 		String validatePro = "select * from products_kfc where product_name=?";
 		ConnectionUtil conect = new ConnectionUtil();
 		Connection con = conect.getDBConnection();
 		PreparedStatement pstmt = con.prepareStatement(validatePro);
-		pstmt.setString(1, product.getProductName());
+		pstmt.setString(1, selectProduct);
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next()) {
 //			System.out.println("Valid Product");
 
-			productValid=new Products(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDouble(4),rs.getString(5),rs.getString(6));
+			productValid = new Products(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4),
+					rs.getString(5), rs.getString(6));
 			return productValid;
 		} else {
 			System.out.println("invalid Products");
+
 			return null;
 		}
 	}
+
 
 }

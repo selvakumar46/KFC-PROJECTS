@@ -38,18 +38,16 @@ public class User {
 		this.mailId = mailId;
 	}
 	
-	public User(String userName, long mobileNumber, String mailId) {
-		super();
-		this.userName = userName;
-		this.mobileNumber = mobileNumber;
-		this.mailId = mailId;
-	}
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public User(String userMail, long num) {
+		// TODO Auto-generated constructor stub
+	}
+	public User(String name, long mobile, String mail) {
 		// TODO Auto-generated constructor stub
 	}
 	@Override

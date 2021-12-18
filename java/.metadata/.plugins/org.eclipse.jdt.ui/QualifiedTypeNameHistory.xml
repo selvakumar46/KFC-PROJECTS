@@ -3,10 +3,14 @@
     <fullyQualifiedTypeName name="com.kfc.ProductDao"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.beans.Statement"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.Dao.OrdersDao"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="com.kfc.User"/>
+    <fullyQualifiedTypeName name="pojo.Orders"/>
     <fullyQualifiedTypeName name="com.kfc.ConnectionUtil"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="com.kfc.Products"/>
-    <fullyQualifiedTypeName name="java.beans.Statement"/>
 </qualifiedTypeNameHistroy>

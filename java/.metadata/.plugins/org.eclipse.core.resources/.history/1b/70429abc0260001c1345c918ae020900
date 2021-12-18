@@ -1,0 +1,56 @@
+package com.Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.kfc.ConnectionUtil;
+import com.kfc.Products;
+
+import pojo.Orders;
+
+public class OrdersDao {
+
+	public void   insertOrder(Orders order) throws SQLException {
+		
+		Orders insert=null;
+		String insertOrder="insert into order_kfc (product_id,user_id,quantity,total_price) values (?,?,?,?)";
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		PreparedStatement pstmt=con.prepareStatement(insertOrder);
+		pstmt.setInt(1, order.getProductId());
+		pstmt.setInt(2, order.getUserId());
+		pstmt.setInt(3, order.getQuantity());
+		pstmt.setDouble(4, order.getTotalPrice());
+		int i= pstmt.executeUpdate();
+		System.out.println(i+" Product added to your cart");
+		
+		
+		
+//		return true;
+	}
+	public List<Orders> showProduc(Orders order) throws SQLException {
+		List<Orders> listOfOrders = new ArrayList<Orders>();
+//		
+		String query = "select * from order_kfc where user_id=?";
+		ConnectionUtil conect = new ConnectionUtil();
+		Connection con = conect.getDBConnection();
+		PreparedStatement stmt = con.prepareStatement(query);
+		stmt.setInt(1, order.getUserId());
+		
+		ResultSet rs = stmt.executeQuery(query);
+		while (rs.next()) {
+
+			System.out.format("%-5s%-27s%-6s%-10s%-5s%-8s%-7s%-9s", "name=", rs.getString(2), "price=", rs.getDouble(4),
+					"type-", rs.getString(5), "Status-", rs.getString(6));
+			System.out.println();
+		}
+
+		return listOfOrders;
+		}
+
+}

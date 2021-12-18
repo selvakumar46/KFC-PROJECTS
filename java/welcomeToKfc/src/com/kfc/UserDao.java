@@ -39,7 +39,7 @@ public class UserDao {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next()) {
 //			System.out.println(rs.getString(2)+","+rs.getLong(3)+","+rs.getString(4));
-			user = new User(rs.getString(2),logNumber,logMail);
+			user = new User(rs.getInt(1), rs.getString(2), logNumber, logMail);
 			return user;
 		} else {
 			return null;

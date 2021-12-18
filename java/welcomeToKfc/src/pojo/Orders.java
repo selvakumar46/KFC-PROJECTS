@@ -55,6 +55,18 @@ public class Orders {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public Orders(int productId, int userId, int quantity, Double totalPrice) {
+		super();
+		this.productId = productId;
+		this.userId = userId;
+		this.quantity = quantity;
+		this.totalPrice = totalPrice;
+	}
+	public Orders(int userIdNum) {
+		// TODO Auto-generated constructor stub
+		this.userId=userIdNum;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(orderId, productId, quantity, totalPrice, userId);
