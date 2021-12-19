@@ -1,0 +1,13 @@
+package com.Dao;
+
+import com.kfc.ConnectionUtil;
+
+public class AdminDao {
+	public boolean adminLogin() {
+		String loginQuery="select * from admin_kfc where mail_id= ? and mobile_number=?";
+		ConnectionUtil conect=new ConnectionUtil();
+		
+		return false;
+	}
+
+}

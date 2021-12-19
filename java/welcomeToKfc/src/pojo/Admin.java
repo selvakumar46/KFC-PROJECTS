@@ -3,33 +3,65 @@ package pojo;
 import java.util.Objects;
 
 public class Admin {
+	private String adminName;
 	private String mailId;
 	private String password;
+
+	public String getAdminName() {
+		return adminName;
+	}
+
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
+
 	public String getMailId() {
 		return mailId;
 	}
+
 	public void setMailId(String mailId) {
 		this.mailId = mailId;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Admin(String mailId, String password) {
+
+	public Admin(String adminName, String mailId, String password) {
 		super();
+		this.adminName = adminName;
 		this.mailId = mailId;
 		this.password = password;
 	}
+
+	public Admin(String adminMail, String adminPassword) {
+		this.mailId = adminMail;
+		this.password = adminPassword;
+		// TODO Auto-generated constructor stub
+	}
+
+	
+
 	@Override
 	public String toString() {
-		return "Admin [mailId=" + mailId + ", password=" + password + "]";
+		return "Admin [adminName=" + adminName + ", mailId=" + mailId + ", password=" + password + "]";
 	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(mailId, password);
+		return Objects.hash(adminName, mailId, password);
 	}
+	
+
+	public Admin() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -39,8 +71,10 @@ public class Admin {
 		if (getClass() != obj.getClass())
 			return false;
 		Admin other = (Admin) obj;
-		return Objects.equals(mailId, other.mailId) && Objects.equals(password, other.password);
+		return Objects.equals(adminName, other.adminName) && Objects.equals(mailId, other.mailId)
+				&& Objects.equals(password, other.password);
 	}
+
 	
-	
+
 }

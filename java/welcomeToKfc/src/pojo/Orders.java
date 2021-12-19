@@ -67,6 +67,7 @@ public class Orders {
 		// TODO Auto-generated constructor stub
 		this.userId=userIdNum;
 	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(orderId, productId, quantity, totalPrice, userId);

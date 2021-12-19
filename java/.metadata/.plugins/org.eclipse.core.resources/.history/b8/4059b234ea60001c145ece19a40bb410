@@ -1,0 +1,10 @@
+package pojo;
+
+import java.util.Objects;
+
+public class Admin {
+	private String mailId;
+	private String password;
+	
+	
+}

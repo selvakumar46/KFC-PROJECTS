@@ -33,10 +33,11 @@ public class OrdersDao {
 		
 //		return true;
 	}
-	public List<Orders> showProduc(Orders order) throws SQLException {
+	public List<Orders> showOrders(Orders order) throws SQLException {
 		List<Orders> listOfOrders = new ArrayList<Orders>();
 //		
-		String query = "select * from order_kfc where user_id=?";
+//		String query = "select pr.product_name,ord.quantity,ord.total_price from products_kfc pr inner join order_kfc ord on ord.product_id=pr.product_id where user_id=?";
+		String query = "select * from orders_kfc where user_id=?";
 		ConnectionUtil conect = new ConnectionUtil();
 		Connection con = conect.getDBConnection();
 		PreparedStatement stmt = con.prepareStatement(query);
@@ -45,11 +46,12 @@ public class OrdersDao {
 		ResultSet rs = stmt.executeQuery(query);
 		while (rs.next()) {
 
+			System.out.printf("%-10s%-32s%-10s%-14s%-7s%-15s","foodName=",rs.getString(1), "Quantity=",rs.getInt(2),"price=",rs.getDouble(3));
 			System.out.println();
-			System.out.println();
+			
 		}
 
-		return listOfOrders;
+		return null;
 		}
 
 }

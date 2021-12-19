@@ -1,5 +1,34 @@
 package com.Dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.kfc.ConnectionUtil;
+import com.kfc.User;
+
+import pojo.Admin;
+
 public class AdminDao {
+	public Admin adminValidate(Admin adminLogin) throws SQLException {
+		Admin login=null;
+		String loginQuery="select * from admin_kfc where mail_id= ? and mobile_number=?";
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		PreparedStatement pstmt=con.prepareStatement(loginQuery);
+		pstmt.setString(1,adminLogin.getMailId());
+		pstmt.setString(2, adminLogin.getPassword());
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+
+			login = new Admin(rs.getString(1), rs.getString(2),rs.getString(3));
+			return login;
+		} else {
+			return null;
+		}
+		
+		
+	}
 
 }

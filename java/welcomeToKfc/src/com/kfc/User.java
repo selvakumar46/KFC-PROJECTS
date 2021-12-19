@@ -46,9 +46,20 @@ public class User {
 	
 	public User(String userMail, long num) {
 		// TODO Auto-generated constructor stub
+		this.mobileNumber = num;
+		this.mailId = userMail;
 	}
-	public User(String name, long mobile, String mail) {
+
+	public User(String userName, long mobileNumber, String mailId) {
+		super();
+		this.userName = userName;
+		this.mobileNumber = mobileNumber;
+		this.mailId = mailId;
+	}
+	
+	public User(int delId) {
 		// TODO Auto-generated constructor stub
+		this.userId=delId;
 	}
 	@Override
 	public String toString() {

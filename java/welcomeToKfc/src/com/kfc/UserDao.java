@@ -13,6 +13,7 @@ public class UserDao {
 		PreparedStatement pst = null;
 		try {
 			pst = con.prepareStatement(insertQuery);
+			System.out.println(user.getUserName());
 			pst.setString(1, user.getUserName());
 			pst.setLong(2, user.getMobileNumber());
 			pst.setString(3, user.getMailId());
@@ -21,6 +22,7 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Value not added");
+			System.out.println();
 		}
 	}
 
@@ -29,7 +31,7 @@ public class UserDao {
 		// String validateQuery="select * from user_kfc where mail_id=
 		// "+login.getMailId()+"' and mobile_number="+login.getMobileNumber();
 		Connection con = null;
-		User user; 
+		User user;
 		PreparedStatement pstmt = null;
 		con = ConnectionUtil.getDBConnection();
 		String query = "select * from user_kfc where mail_id= ? and mobile_number=?";
@@ -47,5 +49,33 @@ public class UserDao {
 
 	}
 
-}
+	public void updateUser(User user1) throws SQLException {
+		
+		String updateQuery = "update user_kfc set mail_id=? where mobile_number=?  ";
+		System.out.println(user1.getMailId());
+		System.out.println(user1.getMobileNumber());
+		ConnectionUtil conect = new ConnectionUtil();
+		Connection con = conect.getDBConnection();
+		PreparedStatement pstmt = con.prepareStatement(updateQuery);
+		pstmt.setString(1, user1.getMailId());
+		pstmt.setLong(2, user1.getMobileNumber());
+		int i = pstmt.executeUpdate();
+		System.out.println(i + " Row updated");
+		
 
+//		return user;
+
+	}
+	public boolean delUser(User user1) throws SQLException {
+		String delQuery=" delete  from user_kfc where user_id=?";
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		PreparedStatement pstmt=con.prepareStatement(delQuery);
+		pstmt.setInt(1, user1.getUserId());
+		int i=pstmt.executeUpdate();
+		System.out.println(i+"user will deleted successfully");
+		
+		return false;
+	}
+
+}

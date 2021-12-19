@@ -6,8 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.Dao.AdminDao;
 import com.Dao.OrdersDao;
 
+import pojo.Admin;
 import pojo.Orders;
 
 public class TestClass {
@@ -15,9 +17,10 @@ public class TestClass {
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("Welcome to KFC ");
-		System.out.println("\n1.Register \n2.Login\n3.Admin Login \nEnter your choice");
+		System.out.println(
+				"\n1.Register \n2.Login \n3.Forget MailId or Phone Number \n4.Admin Login \nEnter your choice");
 		int choice = Integer.parseInt(scan.nextLine());
-		UserDao userDao = null;
+		UserDao userDao = new UserDao();
 		switch (choice) {
 		case 1:
 			String name;
@@ -100,71 +103,72 @@ public class TestClass {
 					int quantity;
 					char moreChoice;
 					do {
-					do {
-						System.out.println("Which is you want to buy");
-						selectProduct = scan.nextLine();
-						if (selectProduct.isEmpty()) {
-							System.out.println("Please Enter meal you want to buy in Show lists");
+						do {
+							System.out.println("Which is you want to buy");
+							selectProduct = scan.nextLine();
+							if (selectProduct.isEmpty()) {
+								System.out.println("Please Enter meal you want to buy in Show lists");
 
-						}
-					} while (selectProduct.isEmpty());
+							}
+						} while (selectProduct.isEmpty());
 
-					Products product = new Products(selectProduct);
-					Products crtProducts = productDao.validateProduct(selectProduct);
-					System.out.println(crtProducts);
-					if (crtProducts != null) {
-						System.out.println("valid Product");
-					} else {
-						System.out.println("Invalid Product");
-					}
-					do {
-						System.out.println("How many quantity you want");
-						tempQuantity = scan.nextLine();
-						if (!tempQuantity.matches("[0-9]{1,}")) {
-							System.out.println("Please enter Quantity in number");
+						Products product = new Products(selectProduct);
+						Products crtProducts = productDao.validateProduct(selectProduct);
+						System.out.println(crtProducts);
+						if (crtProducts != null) {
+							System.out.println("valid Product");
+						} else {
+							System.out.println("Invalid Product");
 						}
-						if (tempQuantity.isEmpty()) {
-							System.out.println("Please enter Quantity");
-						}
+						do {
+							System.out.println("How many quantity you want");
+							tempQuantity = scan.nextLine();
+							if (!tempQuantity.matches("[0-9]{1,}")) {
+								System.out.println("Please enter Quantity in number");
+							}
+							if (tempQuantity.isEmpty()) {
+								System.out.println("Please enter Quantity");
+							}
 
-					} while (!tempQuantity.matches("[0-9]{1,}"));
-					quantity = Integer.parseInt(tempQuantity);
-					int userIdNum = currentUser.getUserId();
+						} while (!tempQuantity.matches("[0-9]{1,}"));
+						quantity = Integer.parseInt(tempQuantity);
+						int userIdNum = currentUser.getUserId();
 //					System.out.println(userIdNum);
 
-					int productId = crtProducts.getProductId();
-					
-					double totalPrice = quantity * crtProducts.getPrice();
+						int productId = crtProducts.getProductId();
+
+						double totalPrice = quantity * crtProducts.getPrice();
 //					System.out.println("Total Price:"+totalPrice);
 
 //					System.out.println(productId);
-					Orders order= new Orders( productId, userIdNum, quantity, totalPrice);
+						Orders order = new Orders(productId, userIdNum, quantity, totalPrice);
 //					System.out.println(order.getTotalPrice());
-					ordDao.insertOrder(order);
-					System.out.println("Do you want more y/n");
-					 moreChoice= scan.nextLine().charAt(0);
-				}while(moreChoice=='y'||moreChoice=='Y');
+						ordDao.insertOrder(order);
+						System.out.println("Do you want more y/n");
+						moreChoice = scan.nextLine().charAt(0);
+					} while (moreChoice == 'y' || moreChoice == 'Y');
 					System.out.println("1.Confirm order \n2.Cancel Order ");
-					int orderChoice=Integer.parseInt(scan.nextLine());
-					switch(orderChoice){
-						case 1:
-							
-							break;
-						case 2:
-							break;
+					int orderChoice = Integer.parseInt(scan.nextLine());
+					switch (orderChoice) {
+					case 1:
+						
+						break;
+					case 2:
+						System.out.println("");
+						break;
 					}
-					
-					
-					
+
 					break;
 				case 2:
-					
+
 					int userIdNum = currentUser.getUserId();
-					Orders order=new Orders(userIdNum);
-					OrdersDao ordersDao=new OrdersDao();
-					
+
+					Orders order = new Orders(userIdNum);
+					OrdersDao ordersDao = new OrdersDao();
+					ordersDao.showOrders(order);
+
 					break;
-				
+
 				}
 
 //				System.out.println("Welcome"+);
@@ -175,10 +179,64 @@ public class TestClass {
 
 			break;
 		case 3:
+			System.out.println("1.forget MailId \n2.forget Phone Number");
+			int forgetChoice=Integer.parseInt(scan.nextLine());
+			switch(forgetChoice) {
+			case 1:
+				
+				
+				System.out.println("Enter your mobile number");
+				Long forgetMail = scan.nextLong();
+				scan.nextLine();
+				System.out.println("Enter new mailID");
+				String newMail=scan.nextLine();
+				User user1=new User(newMail,forgetMail);
+				userDao.updateUser(user1);
+				
+				break;
+			case 2:
+				break;
+			
+			
+			}
+			break;
+		case 4:
+			AdminDao adminDao=new AdminDao();
 			System.out.println("Enter your Mail Id");
 			String adminMail = scan.nextLine();
 			System.out.println("Enter your password");
 			String adminPassword = scan.nextLine();
+			Admin adminLogin = new Admin(adminMail, adminPassword);
+			Admin currentAdmin=adminDao.adminValidate(adminLogin);
+			System.out.println("Welcome"+currentAdmin.getAdminName()+"!!!");
+			System.out.println("1.update \2.insert \3.delete");
+			int adminChoice=Integer.parseInt(scan.nextLine());
+			switch(adminChoice) {
+			case 1:
+				System.out.println("you want to Update \n1.Products ");
+				int updateChoice=Integer.parseInt(scan.nextLine());
+				switch(updateChoice) {
+				case 1:
+					
+					break;
+				}
+				break;
+			case 2:
+				break;
+			case 3:
+				System.out.println("You want to delete \n1.User \2.Products ");
+				int delChoice=Integer.parseInt(scan.nextLine());
+				switch(delChoice) {
+				case 1 :
+					System.out.println("Enter User id");
+					int delId=Integer.parseInt(scan.nextLine());
+					User user1= new User(delId);
+					break;
+				
+				}
+				break;
+			}
+
 
 			break;
 		}

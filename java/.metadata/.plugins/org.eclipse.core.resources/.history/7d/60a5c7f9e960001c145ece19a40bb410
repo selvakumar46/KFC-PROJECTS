@@ -1,0 +1,9 @@
+package com.Dao;
+
+public class AdminDao {
+	public boolean adminLogin() {
+		
+		return false;
+	}
+
+}

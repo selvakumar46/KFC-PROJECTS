@@ -9,10 +9,12 @@ CREATE TABLE USER_KFC(USER_ID NUMBER DEFAULT PRI.NEXTVAL  ,
 
 DESC USER_KFC;
 SELECT *FROM USER_KFC;
+insert into user_kfc (user_name,mail_id,mobile_number) values ('kumar','kumar@gmail.com',6705347898);
 --select * from user_kfc where mail_id='hari@gmail.com'and mobile_number=1234567898;
 --update  user_kfc set user_name='Vinoth' where user_id=2;
 --delete user_kfc where user_id=2;
 --insert into  user_kfc values(2,'Vinoth','vkaathi@gmail.com',1234567893);
+update user_kfc set mail_id='' where mobile_number=? 
 
 --------------------------------------------------------------------------------------------------------------------------------
 CREATE SEQUENCE PRO
@@ -50,6 +52,7 @@ CREATE TABLE ORDER_KFC(CART_ID NUMBER DEFAULT ORD.NEXTVAL PRIMARY KEY,PRODUCT_ID
 DESCRIBE ORDER_KFC;
 select * from order_kfc;
 select * from products_kfc where product_name='Pepsi ';
+delete  from user_kfc where user_id=22;
 --------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE INVOICE_KFC(INVOICE_ID NUMBER PRIMARY KEY,PRODUCT_ID NUMBER,USER_ID NUMBER,FINAL_PRICE NUMBER(8,2),
                            FOREIGN KEY (PRODUCT_ID)REFERENCES PRODUCTS_KFC(PRODUCT_ID),
@@ -57,4 +60,4 @@ CREATE TABLE INVOICE_KFC(INVOICE_ID NUMBER PRIMARY KEY,PRODUCT_ID NUMBER,USER_ID
             
 DESCRIBE INVOICE_KFC;
                         
-                       
+select pr.product_name,ord.quantity,ord.total_price from products_kfc pr inner join order_kfc ord on ord.product_id=pr.product_id where user_id=69;  
