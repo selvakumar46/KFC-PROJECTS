@@ -51,6 +51,35 @@ public class ProductDao {
 			return null;
 		}
 	}
+	public Products deleteProduct(Products products) throws SQLException {
+		
+		String delProd="delete  from products_kfc where product_name=?";
+//		System.out.println(products.getProductName() );
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		PreparedStatement pstmt=con.prepareStatement(delProd);
+		pstmt.setString(1,products.getProductName());
+		
+		int i=pstmt.executeUpdate();
+		System.out.println(i+"product  deleted Succesfully");
+		Products productDelete=new Products();
+		return productDelete;
+	}
+	public Products updateProduct(Products products) throws SQLException {
+		String updateProduct="update products_kfc set product_status=? where product_name=? ";
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		System.out.println(products.getProductName());
+		System.out.println(products.getProductStatus());
+		PreparedStatement pstmt=con.prepareStatement(updateProduct);
+		pstmt.setString(1, products.getProductStatus());
+		pstmt.setString(2, products.getProductName());
+		int i=pstmt.executeUpdate();
+		System.out.println(i+"product Status Update Successfully");
+		Products products1 = new Products();
+				
+		return products1;
+	}
 
 
 }

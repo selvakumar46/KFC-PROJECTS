@@ -60,4 +60,12 @@ CREATE TABLE INVOICE_KFC(INVOICE_ID NUMBER PRIMARY KEY,PRODUCT_ID NUMBER,USER_ID
             
 DESCRIBE INVOICE_KFC;
                         
-select pr.product_name,ord.quantity,ord.total_price from products_kfc pr inner join order_kfc ord on ord.product_id=pr.product_id where user_id=69;  
+select pr.product_name,ord.quantity,ord.total_price from products_kfc pr inner join order_kfc ord on ord.product_id=pr.product_id where user_id=69; 
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+create table admin_kfc (amin_name varchar2(100) not null,mail_id varchar2(100)unique not null,mobile_number number(10)unique not null);
+
+insert into admin_kfc values('Ganesh','ganesh@gmail.com',1);
+
+select * from admin_kfc;

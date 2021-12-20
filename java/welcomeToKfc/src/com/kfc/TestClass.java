@@ -201,36 +201,52 @@ public class TestClass {
 			}
 			break;
 		case 4:
+			
 			AdminDao adminDao=new AdminDao();
+			ProductDao productDao=null;
 			System.out.println("Enter your Mail Id");
 			String adminMail = scan.nextLine();
-			System.out.println("Enter your password");
+			System.out.println("Enter your mobile number");
 			String adminPassword = scan.nextLine();
 			Admin adminLogin = new Admin(adminMail, adminPassword);
 			Admin currentAdmin=adminDao.adminValidate(adminLogin);
 			System.out.println("Welcome"+currentAdmin.getAdminName()+"!!!");
 			System.out.println("1.update \2.insert \3.delete");
 			int adminChoice=Integer.parseInt(scan.nextLine());
+			
 			switch(adminChoice) {
 			case 1:
 				System.out.println("you want to Update \n1.Products ");
 				int updateChoice=Integer.parseInt(scan.nextLine());
 				switch(updateChoice) {
 				case 1:
-					
+					System.out.println("Enter product Name");
+					String productName =scan.nextLine();
+					System.out.println("Enter Product Status");
+					String productStatus=scan.nextLine();
+					Products products=new Products(productName,productStatus);
+					productDao.updateProduct(products);
 					break;
 				}
 				break;
 			case 2:
+				System.out.println("");
 				break;
 			case 3:
 				System.out.println("You want to delete \n1.User \2.Products ");
 				int delChoice=Integer.parseInt(scan.nextLine());
+				
 				switch(delChoice) {
 				case 1 :
 					System.out.println("Enter User id");
 					int delId=Integer.parseInt(scan.nextLine());
 					User user1= new User(delId);
+					break;
+				case 2:
+					System.out.println("Enter Meal Name");
+					String delProduct=scan.nextLine();
+					Products products=new Products(delProduct);
+					productDao.deleteProduct(products);
 					break;
 				
 				}

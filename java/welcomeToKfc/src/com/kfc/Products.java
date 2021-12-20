@@ -9,42 +9,55 @@ public class Products {
 	private double price;
 	private String productType;
 	private String productStatus;
+
 	public int getProductId() {
 		return productId;
 	}
+
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
+
 	public String getProductName() {
 		return productName;
 	}
+
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public double getPrice() {
 		return price;
 	}
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
 	public String getProductType() {
 		return productType;
 	}
+
 	public void setProductType(String productType) {
 		this.productType = productType;
 	}
+
 	public String getProductStatus() {
 		return productStatus;
 	}
+
 	public void setProductStatus(String productStatus) {
 		this.productStatus = productStatus;
 	}
+
 	public Products(int productId, String productName, String description, double price, String productType,
 			String productStatus) {
 		super();
@@ -55,26 +68,38 @@ public class Products {
 		this.productType = productType;
 		this.productStatus = productStatus;
 	}
+
 	public Products() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Products(String string, String string2, double double1, String string3, String string4) {
 		// TODO Auto-generated constructor stub
 	}
-	public Products(String selectProduct) {
+
+	public Products(String productName) {
+		super();
+		this.productName = productName;
+	}
+
+	public Products(String productName, String productStatus) {
 		// TODO Auto-generated constructor stub
 		this.productName=productName;
+		this.productStatus=productStatus;
 	}
+
 	@Override
 	public String toString() {
 		return "Products [productId=" + productId + ", productName=" + productName + ", description=" + description
 				+ ", price=" + price + ", productType=" + productType + ", productStatus=" + productStatus + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, price, productId, productName, productStatus, productType);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -89,8 +114,5 @@ public class Products {
 				&& productId == other.productId && Objects.equals(productName, other.productName)
 				&& Objects.equals(productStatus, other.productStatus) && Objects.equals(productType, other.productType);
 	}
-	
-	
-	
 
 }
