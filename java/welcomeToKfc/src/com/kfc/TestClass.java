@@ -64,7 +64,7 @@ public class TestClass {
 					System.out.println("Enter mailId");
 				}
 			} while (!mail.matches("[a-z0-9]+[@][a-z]+[.][a-z]{2,3}"));
-			User user = new User(name, mobile, mail);
+			User user = new User(0,name, mobile, mail);
 			userDao.insertUser(user);
 
 		case 2:
@@ -118,12 +118,13 @@ public class TestClass {
 						if (crtProducts != null) {
 							System.out.println("valid Product");
 						} else {
+							
 							System.out.println("Invalid Product");
 						}
 						do {
 							System.out.println("How many quantity you want");
 							tempQuantity = scan.nextLine();
-							if (!tempQuantity.matches("[0-9]{1,}")) {
+							if (!tempQuantity.matches("[1-9]{1,}")) {
 								System.out.println("Please enter Quantity in number");
 							}
 							if (tempQuantity.isEmpty()) {
@@ -190,7 +191,7 @@ public class TestClass {
 				scan.nextLine();
 				System.out.println("Enter new mailID");
 				String newMail=scan.nextLine();
-				User user1=new User(newMail,forgetMail);
+				User user1=new User(0,null,forgetMail,newMail);
 				userDao.updateUser(user1);
 				
 				break;
@@ -203,7 +204,7 @@ public class TestClass {
 		case 4:
 			
 			AdminDao adminDao=new AdminDao();
-			ProductDao productDao=null;
+			ProductDao productDao=new ProductDao();
 			System.out.println("Enter your Mail Id");
 			String adminMail = scan.nextLine();
 			System.out.println("Enter your mobile number");
@@ -230,7 +231,19 @@ public class TestClass {
 				}
 				break;
 			case 2:
-				System.out.println("");
+				System.out.println("Enter meal Name");
+				String mealName=scan.nextLine();
+				System.out.println("Enter Description");
+				String mealDescription=scan.nextLine();
+				System.out.println("Price");
+				double mealPrice=Double.parseDouble(scan.nextLine());
+				System.out.println("Enter product type");
+				String mealType=scan.nextLine();
+				System.out.println("Enter product status");
+				String mealStatus=scan.nextLine();
+				Products productInsert=new Products(0, mealName, mealDescription, mealPrice, mealType, mealStatus);
+				System.out.println(productInsert.getProductName());
+				productDao.insertProducts(productInsert);
 				break;
 			case 3:
 				System.out.println("You want to delete \n1.User \2.Products ");
@@ -239,8 +252,10 @@ public class TestClass {
 				switch(delChoice) {
 				case 1 :
 					System.out.println("Enter User id");
-					int delId=Integer.parseInt(scan.nextLine());
-					User user1= new User(delId);
+					int userId=Integer.parseInt(scan.nextLine());
+					User deleteUser=new User(userId, null, 0, null);
+					System.out.println(userId);
+					userDao.delUser(deleteUser);
 					break;
 				case 2:
 					System.out.println("Enter Meal Name");

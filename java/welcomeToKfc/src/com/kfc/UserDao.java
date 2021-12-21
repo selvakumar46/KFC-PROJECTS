@@ -66,16 +66,18 @@ public class UserDao {
 //		return user;
 
 	}
-	public boolean delUser(User user1) throws SQLException {
+	public User delUser(User deleteUser) throws SQLException {
 		String delQuery=" delete  from user_kfc where user_id=?";
-		ConnectionUtil conect=new ConnectionUtil();
+		User user = new User();
+		ConnectionUtil conect= new ConnectionUtil();
 		Connection con=conect.getDBConnection();
 		PreparedStatement pstmt=con.prepareStatement(delQuery);
-		pstmt.setInt(1, user1.getUserId());
+		pstmt.setInt(1, deleteUser.getUserId());
 		int i=pstmt.executeUpdate();
-		System.out.println(i+"user will deleted successfully");
+		System.out.println(i+"user delete Successfully");
 		
-		return false;
+		
+		return user;
 	}
 
 }

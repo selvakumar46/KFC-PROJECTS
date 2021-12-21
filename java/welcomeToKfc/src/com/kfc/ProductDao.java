@@ -51,35 +51,61 @@ public class ProductDao {
 			return null;
 		}
 	}
+
 	public Products deleteProduct(Products products) throws SQLException {
-		
-		String delProd="delete  from products_kfc where product_name=?";
+
+		String delProd = "delete  from products_kfc where product_name=?";
 //		System.out.println(products.getProductName() );
-		ConnectionUtil conect=new ConnectionUtil();
-		Connection con=conect.getDBConnection();
-		PreparedStatement pstmt=con.prepareStatement(delProd);
-		pstmt.setString(1,products.getProductName());
-		
-		int i=pstmt.executeUpdate();
-		System.out.println(i+"product  deleted Succesfully");
-		Products productDelete=new Products();
+		ConnectionUtil conect = new ConnectionUtil();
+		Connection con = conect.getDBConnection();
+		PreparedStatement pstmt = con.prepareStatement(delProd);
+		pstmt.setString(1, products.getProductName());
+
+		int i = pstmt.executeUpdate();
+		System.out.println(i + "product  deleted Succesfully");
+		Products productDelete = new Products();
 		return productDelete;
 	}
+
 	public Products updateProduct(Products products) throws SQLException {
-		String updateProduct="update products_kfc set product_status=? where product_name=? ";
-		ConnectionUtil conect=new ConnectionUtil();
-		Connection con=conect.getDBConnection();
+	
+		String updateProduct = "update products_kfc set product_status=? where product_name=? ";
+		ConnectionUtil conect = new ConnectionUtil();
+		Connection con = conect.getDBConnection();
 		System.out.println(products.getProductName());
 		System.out.println(products.getProductStatus());
-		PreparedStatement pstmt=con.prepareStatement(updateProduct);
+		PreparedStatement pstmt = con.prepareStatement(updateProduct);
 		pstmt.setString(1, products.getProductStatus());
 		pstmt.setString(2, products.getProductName());
-		int i=pstmt.executeUpdate();
-		System.out.println(i+"product Status Update Successfully");
+		int i = pstmt.executeUpdate();
+		System.out.println(i + "product Status Update Successfully");
 		Products products1 = new Products();
-				
+
 		return products1;
 	}
 
+	public Products  insertProducts(Products productInsert) throws SQLException {
+
+		
+		
+		System.out.println( productInsert.getProductName());
+		System.out.println(productInsert.getDescription());
+		System.out.println(productInsert.getPrice());
+		System.out.println(productInsert.getProductType());
+		System.out.println(productInsert.getProductStatus());
+		String insert = "insert into products_kfc(product_name,description,product_price,product_type,product_status) values (?,?,?,?,?)";
+		ConnectionUtil conect = new ConnectionUtil();
+		Connection con = conect.getDBConnection();
+		PreparedStatement pstmt = con.prepareStatement(insert);
+		pstmt.setString(1, productInsert.getProductName());
+		pstmt.setString(2, productInsert.getDescription());
+		pstmt.setDouble(3, productInsert.getPrice());
+		pstmt.setString(4, productInsert.getProductType());
+		pstmt.setString(5, productInsert.getProductStatus());
+		int i=pstmt.executeUpdate();
+		System.out.println(i+"product Update Successfully");
+		return null;
+		
+	}
 
 }

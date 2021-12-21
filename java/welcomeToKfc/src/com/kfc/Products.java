@@ -74,10 +74,6 @@ public class Products {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Products(String string, String string2, double double1, String string3, String string4) {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Products(String productName) {
 		super();
 		this.productName = productName;
@@ -85,8 +81,8 @@ public class Products {
 
 	public Products(String productName, String productStatus) {
 		// TODO Auto-generated constructor stub
-		this.productName=productName;
-		this.productStatus=productStatus;
+		this.productName = productName;
+		this.productStatus = productStatus;
 	}
 
 	@Override
