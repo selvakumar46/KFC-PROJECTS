@@ -69,3 +69,18 @@ create table admin_kfc (amin_name varchar2(100) not null,mail_id varchar2(100)un
 insert into admin_kfc values('Ganesh','ganesh@gmail.com',1);
 
 select * from admin_kfc;
+--------------------------------------------------------------------------------------------------------------------------------
+create sequence ord_item
+start with 1 increment by 1;
+
+create table order_items_kfc (order_item_id number default ord_item.nextval ,product_id number ,user_id number,total_price number,
+                                primary key(order_item_id),
+                                foreign key (product_id)references products_kfc (product_id),
+                                foreign key (user_id) references user_kfc(user_id));
+                    
+--------------------------------------------------------------------------------------------------------------------------------
+desc order_items_kfc;
+drop table order_items_kfc;
+select * from order_kfc where user_id=24;
+select * from order_kfc where user_id=70;
+update order_kfc set Quantity=9 where user_id=81;

@@ -6,15 +6,17 @@
     <fullyQualifiedTypeName name="com.Dao.OrdersDao"/>
     <fullyQualifiedTypeName name="pojo.Orders"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="pojo.Admin"/>
     <fullyQualifiedTypeName name="com.Dao.AdminDao"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="com.kfc.User"/>
-    <fullyQualifiedTypeName name="com.kfc.ConnectionUtil"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="com.kfc.Products"/>
     <fullyQualifiedTypeName name="com.kfc.ProductDao"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.model.Orders"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.model.Admin"/>
+    <fullyQualifiedTypeName name="com.kfc.ConnectionUtil"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 </qualifiedTypeNameHistroy>

@@ -1,4 +1,4 @@
-package pojo;
+package com.model;
 
 import java.util.Objects;
 
@@ -38,14 +38,6 @@ public class Admin {
 		this.password = password;
 	}
 
-	public Admin(String adminMail, String adminPassword) {
-		this.mailId = adminMail;
-		this.password = adminPassword;
-		// TODO Auto-generated constructor stub
-	}
-
-	
-
 	@Override
 	public String toString() {
 		return "Admin [adminName=" + adminName + ", mailId=" + mailId + ", password=" + password + "]";
@@ -55,7 +47,6 @@ public class Admin {
 	public int hashCode() {
 		return Objects.hash(adminName, mailId, password);
 	}
-	
 
 	public Admin() {
 		super();
@@ -74,7 +65,5 @@ public class Admin {
 		return Objects.equals(adminName, other.adminName) && Objects.equals(mailId, other.mailId)
 				&& Objects.equals(password, other.password);
 	}
-
-	
 
 }

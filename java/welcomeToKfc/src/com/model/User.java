@@ -1,4 +1,4 @@
-package com.kfc;
+package com.model;
 
 import java.util.Objects;
 

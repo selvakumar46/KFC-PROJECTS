@@ -1,14 +1,14 @@
 package com.Dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.kfc.ConnectionUtil;
-import com.kfc.User;
-
-import pojo.Admin;
+import com.model.Admin;
+import com.model.User;
 
 public class AdminDao {
 	public Admin adminValidate(Admin adminLogin) throws SQLException {
@@ -29,6 +29,16 @@ public class AdminDao {
 		}
 		
 		
+	}
+	public Admin insertAdmin(Admin insert) throws SQLException {
+		String insertAdm="insert into admin_kfc values(?,?,?)";
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		PreparedStatement pstmt=con.prepareStatement(insertAdm);
+		pstmt.setString(1, insert.getAdminName());
+		pstmt.setString(2, insert.getMailId());
+//		psttm
+		return null;
 	}
 
 }

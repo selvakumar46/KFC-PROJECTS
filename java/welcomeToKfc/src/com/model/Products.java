@@ -1,4 +1,4 @@
-package com.kfc;
+package com.model;
 
 import java.util.Objects;
 
@@ -72,17 +72,6 @@ public class Products {
 	public Products() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Products(String productName) {
-		super();
-		this.productName = productName;
-	}
-
-	public Products(String productName, String productStatus) {
-		// TODO Auto-generated constructor stub
-		this.productName = productName;
-		this.productStatus = productStatus;
 	}
 
 	@Override
