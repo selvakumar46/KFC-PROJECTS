@@ -1,5 +1,6 @@
 package com.Dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,18 +43,18 @@ public class OrdersDao {
 	public List<Orders> showOrders(Orders order) throws SQLException {
 		List<Orders> listOfOrders = new ArrayList<Orders>();
 
-//		String query = "select pr.product_name,ord.quantity,ord.total_price from products_kfc pr inner join order_kfc ord on ord.product_id=pr.product_id where user_id=?";
-		String query = "select * from order_kfc where user_id=?";
+		String query = "select pr.product_name,ord.quantity,ord.total_price from products_kfc pr inner join order_kfc ord on ord.product_id=pr.product_id where user_id=?";
+//		String query = "select * from order_kfc where user_id=?";
 		ConnectionUtil conect = new ConnectionUtil();
 		Connection con = conect.getDBConnection();
-		PreparedStatement stmt = con.prepareStatement(query);
-		stmt.setInt(1, order.getUserId());
+//		PreparedStatement stmt = con.prepareStatement(query);
+		CallableStatement cstmt = con.prepareCall(query);
+		cstmt.setInt(1, order.getUserId());
 
-		ResultSet rs = stmt.executeQuery(query);
+		ResultSet rs = cstmt.executeQuery();
 		while (rs.next()) {
-
-			System.out.println(rs.getInt(1));
-
+			System.out.format("%-16s%-30s%-12s%-25s%-8s%-16s","product name=",rs.getString(1), "Quantity=", rs.getInt(2),"Price=" , rs.getDouble(3));
+			System.out.println();
 		}
 
 		return null;
@@ -62,7 +63,7 @@ public class OrdersDao {
 	public Orders delOrder(Orders deleteOrders) {
 		Orders orders = new Orders();
 		String delQuery = "delete  from order_kfc where user_id=? ";
-		ConnectionUtil conect =null;
+		ConnectionUtil conect = null;
 
 		Connection con = conect.getDBConnection();
 		PreparedStatement pstmt;
@@ -78,15 +79,21 @@ public class OrdersDao {
 			e.printStackTrace();
 		}
 		return orders;
-		
+
 	}
 
-	public Orders updateOrder(){
-		String update = "update order_kfc set Quantity=? where user_id=?";
+	public Orders updateOrder(Orders updateOrders) {
+		String update = "update order_kfc set quantity=?, total_price=?  where user_id=? and product_id=?";
 		ConnectionUtil conect = new ConnectionUtil();
 		Connection con = conect.getDBConnection();
 		try {
 			PreparedStatement pstmt = con.prepareStatement(update);
+			pstmt.setInt(1, updateOrders.getQuantity());
+			pstmt.setDouble(2, updateOrders.getTotalPrice());
+			pstmt.setInt(3, updateOrders.getUserId());
+			pstmt.setInt(4, updateOrders.getProductId());
+			int i=pstmt.executeUpdate();
+			System.out.println(i+"updated successfully...");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

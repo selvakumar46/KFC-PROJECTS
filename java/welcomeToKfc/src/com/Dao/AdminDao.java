@@ -18,11 +18,11 @@ public class AdminDao {
 		Connection con=conect.getDBConnection();
 		PreparedStatement pstmt=con.prepareStatement(loginQuery);
 		pstmt.setString(1,adminLogin.getMailId());
-		pstmt.setString(2, adminLogin.getPassword());
+		pstmt.setLong(2, adminLogin.getMobileNumber());
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next()) {
 
-			login = new Admin(rs.getString(1), rs.getString(2),rs.getString(3));
+			login = new Admin(rs.getString(1), rs.getString(2),rs.getLong(3));
 			return login;
 		} else {
 			return null;
@@ -37,6 +37,9 @@ public class AdminDao {
 		PreparedStatement pstmt=con.prepareStatement(insertAdm);
 		pstmt.setString(1, insert.getAdminName());
 		pstmt.setString(2, insert.getMailId());
+		pstmt.setLong(3, insert.getMobileNumber());
+		int i=pstmt.executeUpdate();
+		System.out.println(i+" new admin Inserted");
 //		psttm
 		return null;
 	}
