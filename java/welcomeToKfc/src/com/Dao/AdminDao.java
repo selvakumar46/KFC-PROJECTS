@@ -43,5 +43,41 @@ public class AdminDao {
 //		psttm
 		return null;
 	}
-
+	public boolean updateAdmin(Admin admin) {
+		Admin adminUpdate=null;
+		String updateAdmin="update admin_kfc set mobile_number=? where mail_id=?";
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		try {
+			PreparedStatement pstmt=con.prepareStatement(updateAdmin);
+			pstmt.setLong(1, admin.getMobileNumber());
+			pstmt.setString(2, admin.getMailId());
+			int i=pstmt.executeUpdate();
+			System.out.println(i+"updated successfully...");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	public boolean deleteAdmin(Admin admin) {
+		String delete=" delete from admin_kfc where mail_id=? and mobile_number=?";
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		try {
+			PreparedStatement pstmt=con.prepareStatement(delete);
+			pstmt.setString(1, admin.getMailId());
+			pstmt.setLong(2, admin.getMobileNumber());
+			int i = pstmt.executeUpdate();
+			System.out.println(i+"admin deleted successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+				
+		return false;
+	}
 }

@@ -44,7 +44,7 @@ public class OrdersDao {
 		List<Orders> listOfOrders = new ArrayList<Orders>();
 
 		String query = "select pr.product_name,ord.quantity,ord.total_price from products_kfc pr inner join order_kfc ord on ord.product_id=pr.product_id where user_id=?";
-//		String query = "select * from order_kfc where user_id=?";
+//		String query = "select * from order_kfc";
 		ConnectionUtil conect = new ConnectionUtil();
 		Connection con = conect.getDBConnection();
 //		PreparedStatement stmt = con.prepareStatement(query);
@@ -53,8 +53,14 @@ public class OrdersDao {
 
 		ResultSet rs = cstmt.executeQuery();
 		while (rs.next()) {
-			System.out.format("%-16s%-30s%-12s%-25s%-8s%-16s","product name=",rs.getString(1), "Quantity=", rs.getInt(2),"Price=" , rs.getDouble(3));
+			System.out.format("%-16s%-30s%-12s%-25s%-8s%-16s", "product name=", rs.getString(1), "Quantity=",
+					rs.getInt(2), "Price=", rs.getDouble(3));
 			System.out.println();
+//			Orders order1=new Orders(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5));
+//					
+//			listOfOrders.add(order1);
+//			System.out.println(listOfOrders);
+
 		}
 
 		return null;
@@ -92,13 +98,35 @@ public class OrdersDao {
 			pstmt.setDouble(2, updateOrders.getTotalPrice());
 			pstmt.setInt(3, updateOrders.getUserId());
 			pstmt.setInt(4, updateOrders.getProductId());
-			int i=pstmt.executeUpdate();
-			System.out.println(i+"updated successfully...");
+			int i = pstmt.executeUpdate();
+			System.out.println(i + "updated successfully...");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return null;
+
+	}
+	public List<Orders> allCart(Orders order1){
+		
+		List<Orders> viewAll=new ArrayList<Orders>();
+		String query="select * from order_kfc where user_id=?";
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		try {
+			PreparedStatement pstmt=con.prepareStatement(query);
+			pstmt.setInt(1,order1.getUserId());
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Orders order=new Orders(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5));
+				viewAll.add(order);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return viewAll;
 	}
 }

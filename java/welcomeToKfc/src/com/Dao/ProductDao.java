@@ -16,7 +16,7 @@ public class ProductDao {
 	public List<Products> showProduct() {
 		List<Products> listOfProducts = new ArrayList<Products>();
 //		
-		String query = "select * from products_kfc";
+		String query = "select * from products_kfc where product_status='Available'";
 		ConnectionUtil conect = new ConnectionUtil();
 		Connection con = conect.getDBConnection();
 		Statement stmt;

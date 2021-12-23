@@ -13,10 +13,14 @@
     <fullyQualifiedTypeName name="com.kfc.Products"/>
     <fullyQualifiedTypeName name="com.kfc.ProductDao"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="com.model.Orders"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="com.model.Admin"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="com.kfc.ConnectionUtil"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="com.Dao.InvoiceDao"/>
+    <fullyQualifiedTypeName name="com.model.Invoice"/>
+    <fullyQualifiedTypeName name="com.model.Products"/>
+    <fullyQualifiedTypeName name="com.model.Orders"/>
+    <fullyQualifiedTypeName name="com.model.Admin"/>
 </qualifiedTypeNameHistroy>

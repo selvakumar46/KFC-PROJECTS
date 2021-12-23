@@ -14,7 +14,7 @@ insert into user_kfc (user_name,mail_id,mobile_number) values ('kumar','kumar@gm
 --update  user_kfc set user_name='Vinoth' where user_id=2;
 --delete user_kfc where user_id=2;
 --insert into  user_kfc values(2,'Vinoth','vkaathi@gmail.com',1234567893);
-update user_kfc set mail_id='' where mobile_number=? 
+update user_kfc set mail_id='' where mobile_number=?;
 
 --------------------------------------------------------------------------------------------------------------------------------
 CREATE SEQUENCE PRO
@@ -73,14 +73,21 @@ select * from admin_kfc;
 create sequence ord_item
 start with 1 increment by 1;
 
-create table order_items_kfc (order_item_id number default ord_item.nextval ,product_id number ,user_id number,total_price number,
-                                primary key(order_item_id),
-                                foreign key (product_id)references products_kfc (product_id),
-                                foreign key (user_id) references user_kfc(user_id));
-                    
+create table invoice_kfc(invoice_id number default ord_item.nextval primary key,product_id number,user_id number,Quantity number,total_price number(8,2),
+                       delivery_adress varchar2(200) ,order_date date default sysdate);
+select * from invoice_kfc;           
 --------------------------------------------------------------------------------------------------------------------------------
-desc order_items_kfc;
+desc invoice_kfc;
 drop table order_items_kfc;
 select * from order_kfc where user_id=24;
 select * from order_kfc where user_id=70;
 update order_kfc set Quantity=9 where user_id=81;
+update order_kfc set Quantity=3, total_price=500  where user_id=24 and product_id=8;
+--------------------------------------------------------------------------------------------------------------------------------
+create sequence cart_id
+start with 1 increment by 1;
+
+create table cart_items (cart_id number default cart_id.nextval primary key,product_id number,user_id number,product_name varchar2(100),quantity number,
+                        total_Price number ,status varchar2(100) default 'Ordered',order_date date default sysdate,
+                        foreign key (product_id)references products_kfc(products_id),
+                        foreign key (user_id)references user_kfc(user_id));

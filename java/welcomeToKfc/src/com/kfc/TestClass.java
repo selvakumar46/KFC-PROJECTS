@@ -20,15 +20,16 @@ import com.model.User;
 public class TestClass {
 	public static void main(String[] args) throws SQLException {
 		Scanner scan = new Scanner(System.in);
-
+		
 		System.out.println("Welcome to KFC ");
 		System.out.println(
 				"\n1.Register \n2.Login \n3.Forget MailId or Phone Number \n4.Admin Login \nEnter your choice");
 		int choice = Integer.parseInt(scan.nextLine());
 		UserDao userDao = new UserDao();
 		ProductDao productDao = new ProductDao();
-		InvoiceDao invoicDao=new InvoiceDao();
+		InvoiceDao invoicDao = new InvoiceDao();
 		OrdersDao ordDao = new OrdersDao();
+
 		switch (choice) {
 		case 1:
 			String name;
@@ -89,12 +90,14 @@ public class TestClass {
 			if (currentUser != null) {
 //				System.out.println("Login Successfully");
 				System.out.println("Welcome " + currentUser.getUserName() + "!!!");
+				
+				  
 
 				System.out.println("Do you want:\n1.show products \n2.show cart");
 				int productChoice = Integer.parseInt(scan.nextLine());
 				switch (productChoice) {
 				case 1:
-					
+
 					productDao.showProduct();
 //					List<Products> products= productDao.showProduct();
 //					for(int i=0;i<products.size();i++)
@@ -103,8 +106,6 @@ public class TestClass {
 //						System.out.println(products.get(i));
 ////						i++;
 //					}
-
-					
 
 					String selectProduct;
 					String tempQuantity;
@@ -160,19 +161,25 @@ public class TestClass {
 					OrdersDao orderDao = new OrdersDao();
 					System.out.println("your cart is ");
 					int userIdNum = currentUser.getUserId();
-					Orders order=new Orders(0, 0, userIdNum, 0, null);
-					orderDao.showOrders(order);
+					Orders order = new Orders(0, 0, userIdNum, 0, null);
+					List cart=orderDao.showOrders(order);
+					System.out.println(cart);
 					System.out.println("1.Confirm order \n2.Cancel Order \n3.Update Order");
 					int orderChoice = Integer.parseInt(scan.nextLine());
-					
+
 					switch (orderChoice) {
 					case 1:
 						System.out.println("Enter your delivery address");
 						String address = scan.nextLine();
-						int userId=currentUser.getUserId();
-						Invoice insert=new Invoice(0, 0, userId, 0, address, null);
+						int userId = currentUser.getUserId();
+						Orders order1=new Orders(0, 0, userId, 0, null);
+						List<Orders> allCart=ordDao.allCart(order1);
+						for (int i=0;i<allCart.size();i++) {
+							System.out.println(allCart.get(i));
+						}
 						
 						
+
 						break;
 					case 2:
 
@@ -183,25 +190,23 @@ public class TestClass {
 						break;
 					case 3:
 						System.out.println("Enter meal name you want to update");
-						String update=scan.nextLine();
-						Products valaidate=new Products(0, update, null, 0, null, null);
-						Products updateProduct=productDao.validateProduct(update);
-						int userId1=currentUser.getUserId();
-						int proId=updateProduct.getProductId();
-						System.out.println("How many you want in "+updateProduct.getProductName());
-						int newQuantity=Integer.parseInt(scan.nextLine());
-						double newPrice=newQuantity*updateProduct.getPrice();
-						Orders updateOrder=new Orders(0, proId, userId1, newQuantity, newPrice);
+						String update = scan.nextLine();
+						Products valaidate = new Products(0, update, null, 0, null, null);
+						Products updateProduct = productDao.validateProduct(update);
+						int userId1 = currentUser.getUserId();
+						int proId = updateProduct.getProductId();
+						System.out.println("How many you want in " + updateProduct.getProductName());
+						int newQuantity = Integer.parseInt(scan.nextLine());
+						double newPrice = newQuantity * updateProduct.getPrice();
+						Orders updateOrder = new Orders(0, proId, userId1, newQuantity, newPrice);
 						orderDao.updateOrder(updateOrder);
 						break;
 					}
 
 					break;
-				
 
 				}
 
-//				System.out.println("Welcome"+);
 			} else {
 				System.out.println("invalid mailId or mobile number");
 
@@ -231,11 +236,11 @@ public class TestClass {
 		case 4:
 
 			AdminDao adminDao = new AdminDao();
-			
+
 			System.out.println("Enter your Mail Id");
 			String adminMail = scan.nextLine();
 			System.out.println("Enter your mobile number");
-			long adminNumber =Long.parseLong (scan.nextLine());
+			long adminNumber = Long.parseLong(scan.nextLine());
 			Admin adminLogin = new Admin(null, adminMail, adminNumber);
 			Admin currentAdmin = adminDao.adminValidate(adminLogin);
 			System.out.println("Welcome" + currentAdmin.getAdminName() + "!!!");
@@ -244,7 +249,7 @@ public class TestClass {
 
 			switch (adminChoice) {
 			case 1:
-				System.out.println("you want to Update \n1.Products ");
+				System.out.println("you want to Update \n1.Products \n2.admin mobile number ");
 				int updateChoice = Integer.parseInt(scan.nextLine());
 				switch (updateChoice) {
 				case 1:
@@ -252,9 +257,16 @@ public class TestClass {
 					String productName = scan.nextLine();
 					System.out.println("Enter Product Status");
 					String productStatus = scan.nextLine();
-					Products products = new Products(0, productName, null, 0, null, null);
+					Products products = new Products(0, productName, null, 0, null, productStatus);
 					productDao.updateProduct(products);
 					break;
+				case 2:
+					System.out.println("Enter admin mailId");
+					String adminMailId = scan.nextLine();
+					System.out.println("Enter new mobile number");
+					long adminNewNumber = Long.parseLong(scan.nextLine());
+					Admin admin = new Admin(null, adminMailId, adminNewNumber);
+					adminDao.updateAdmin(admin);
 				}
 				break;
 			case 2:
@@ -291,7 +303,7 @@ public class TestClass {
 				break;
 
 			case 3:
-				System.out.println("You want to delete \n1.User \2.Products ");
+				System.out.println("You want to delete \n1.delete User \2.delete Products \n3.delete admin ");
 				int delChoice = Integer.parseInt(scan.nextLine());
 
 				switch (delChoice) {
@@ -307,6 +319,15 @@ public class TestClass {
 					String delProduct = scan.nextLine();
 					Products products = new Products(0, delProduct, null, 0, null, null);
 					productDao.deleteProduct(products);
+					break;
+				case 3:
+					System.out.println("Enter Admin mobile number");
+					long delNumber = Long.parseLong(scan.nextLine());
+					System.out.println("enter admin mailId");
+					String delMail = scan.nextLine();
+					Admin admin = new Admin(null, delMail, delNumber);
+					adminDao.deleteAdmin(admin);
+
 					break;
 
 				}
