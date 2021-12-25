@@ -145,5 +145,33 @@ public class ProductDao {
 
 		return product;
 	}
+	public Products validateProduct1(Products product) {
+		Products productValid = null;
+		String validatePro = "select * from products_kfc where product_id=?";
+		ConnectionUtil conect = new ConnectionUtil();
+		Connection con = conect.getDBConnection();
+		PreparedStatement pstmt;
+		try {
+			pstmt = con.prepareStatement(validatePro);
+			pstmt.setInt(1, product.getProductId());
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+//				System.out.println("Valid Product");
 
+				productValid = new Products(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4),
+						rs.getString(5), rs.getString(6));
+				return productValid;
+			} else {
+				System.out.println("invalid Products");
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return productValid;
+
+	}
+	 
 }
+

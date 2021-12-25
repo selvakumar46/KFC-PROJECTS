@@ -40,7 +40,8 @@ update  products_kfc set product_name='Pepsi' where product_id=8;
 
 select * from products_kfc where product_name='Red Bull';
 commit;
-
+select * from products_kfc;
+select * from products_kfc where product_status='Available';
 --------------------------------------------------------------------------------------------------------------------------------
 CREATE SEQUENCE ORD
 START WITH 1 INCREMENT BY 1;
@@ -86,8 +87,14 @@ update order_kfc set Quantity=3, total_price=500  where user_id=24 and product_i
 --------------------------------------------------------------------------------------------------------------------------------
 create sequence cart_id
 start with 1 increment by 1;
-
 create table cart_items (cart_id number default cart_id.nextval primary key,product_id number,user_id number,product_name varchar2(100),quantity number,
                         total_Price number ,status varchar2(100) default 'Ordered',order_date date default sysdate,
-                        foreign key (product_id)references products_kfc(products_id),
+                        foreign key (product_id)references products_kfc(product_id),
                         foreign key (user_id)references user_kfc(user_id));
+                        
+desc cart_items;
+select * from cart_items;
+
+update  cart_items  set status='delevered' where user_id=24;
+select * from cart_items where status='Ordered';
+commit;

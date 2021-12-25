@@ -51,8 +51,9 @@ public class UserDao {
 				return user;
 			} else {
 				System.out.println("invalid input");
+				return user;
 			}
-			return user;
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -129,4 +129,26 @@ public class OrdersDao {
 		}
 		return viewAll;
 	}
+	public Orders delOrderCart(Orders deleteOrder) {
+		Orders orders = new Orders();
+		String delQuery = "delete  from order_kfc where user_id=? and product_id=? ";
+		ConnectionUtil conect = null;
+
+		Connection con = conect.getDBConnection();
+		PreparedStatement pstmt;
+		try {
+			pstmt = con.prepareStatement(delQuery);
+			pstmt.setInt(1, deleteOrder.getUserId());
+			pstmt.setInt(2, deleteOrder.getProductId());
+			int i = pstmt.executeUpdate();
+			System.out.println(i + "delete succesfully");
+
+			return orders;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return orders;
+
+	}
 }
