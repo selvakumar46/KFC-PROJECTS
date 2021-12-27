@@ -41,8 +41,8 @@ public class cartItemDao {
 			PreparedStatement pstmt = con.prepareStatement(show);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				CartItem cartItems = new CartItem(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getInt(5),
-						rs.getInt(6), rs.getString(7), rs.getDate(8));
+				CartItem cartItems = new CartItem(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
+						rs.getInt(5), rs.getInt(6), rs.getString(7), rs.getDate(8));
 				cartItem.add(cartItems);
 			}
 		} catch (SQLException e) {
@@ -55,7 +55,7 @@ public class cartItemDao {
 
 	public boolean delete() {
 		String delete = "delete from cart_items where user_id=?";
-		
+
 		ConnectionUtil conect = new ConnectionUtil();
 		Connection con = conect.getDBConnection();
 		try {
@@ -83,5 +83,19 @@ public class cartItemDao {
 			e.printStackTrace();
 		}
 		return carts;
+
+	}
+	public boolean showInvoice() {
+		CartItem carts=null;
+		String show="";
+		ConnectionUtil conect=new ConnectionUtil();
+		Connection con=conect.getDBConnection();
+		try {
+			PreparedStatement pstmt=con.prepareStatement(null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

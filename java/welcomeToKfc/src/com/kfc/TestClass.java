@@ -203,6 +203,8 @@ public class TestClass {
 								ordDao.delOrderCart(deleteOrder);
 
 							}
+
+							System.out.println("Your total bill is ");
 							System.out.println("Your Order will Placed Succesfully...");
 
 							break;
@@ -280,7 +282,8 @@ public class TestClass {
 			}
 			break;
 		case 4:
-
+			boolean flag1 = true;
+			int Exit = 0;
 			AdminDao adminDao = new AdminDao();
 
 			System.out.println("Enter your Mail Id");
@@ -290,12 +293,13 @@ public class TestClass {
 			Admin adminLogin = new Admin(null, adminMail, adminNumber);
 			Admin currentAdmin = adminDao.adminValidate(adminLogin);
 			System.out.println("Welcome" + currentAdmin.getAdminName() + "!!!");
+
 			System.out.println("1.update \n2.insert \n3.delete");
 			int adminChoice = Integer.parseInt(scan.nextLine());
 
 			switch (adminChoice) {
 			case 1:
-				System.out.println("you want to Update \n1.Products \n2.admin mobile number \3.order status ");
+				System.out.println("you want to Update \n1.Products \n2.admin mobile number \n3.order status ");
 				int updateChoice = Integer.parseInt(scan.nextLine());
 				switch (updateChoice) {
 				case 1:
@@ -305,6 +309,16 @@ public class TestClass {
 					String productStatus = scan.nextLine();
 					Products products = new Products(0, productName, null, 0, null, productStatus);
 					productDao.updateProduct(products);
+//					System.out.println("press 1 back to home /n press 2  exit");
+//					int exit=Integer.parseInt(scan.nextLine());
+//					if (exit==1) {
+//						flag1=true;
+//					}
+//					else {
+//						System.out.println("Thank you "+currentAdmin.getAdminName());
+//						flag1=false;
+
+//				}
 					break;
 				case 2:
 					System.out.println("Enter admin mailId");
@@ -313,6 +327,7 @@ public class TestClass {
 					long adminNewNumber = Long.parseLong(scan.nextLine());
 					Admin admin = new Admin(null, adminMailId, adminNewNumber);
 					adminDao.updateAdmin(admin);
+
 					break;
 				case 3:
 					List<CartItem> show = cartDao.showUsers();
@@ -328,7 +343,7 @@ public class TestClass {
 					System.out.println("Status updated");
 					break;
 				}
-
+				break;
 			case 2:
 				System.out.println("1.Product \n2.new admin");
 				int insertChoice = Integer.parseInt(scan.nextLine());
